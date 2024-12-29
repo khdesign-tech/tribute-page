@@ -1,0 +1,24 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS simple_blog;
+
+-- Use the database
+USE simple_blog;
+
+-- Create the posts table
+CREATE TABLE IF NOT EXISTS posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Connect to the database
+USE simple_blog;
+
+-- Add a new column for the user's name
+ALTER TABLE posts
+ADD COLUMN user_name VARCHAR(255) NOT NULL AFTER id;
+
+-- Set a default value for the user_name column for existing rows
+UPDATE posts
+SET user_name = 'Anonymous'
+WHERE user_name IS NULL OR user_name = '';
